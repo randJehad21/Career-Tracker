@@ -1,0 +1,30 @@
+{% extends "tracker/layout.html" %}
+
+{% block body %}
+<div class="form-container">
+<div class="auth-form">
+    <h2>Register</h2>
+
+    {% if message %}
+        <div class="auth-message">{{ message }}</div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter username" required>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter email" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter password" required>
+
+        <label>Confirm Password</label>
+        <input type="password" name="confirmation" placeholder="Confirm password" required>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+</div>
+{% endblock %}

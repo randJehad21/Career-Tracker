@@ -1,0 +1,72 @@
+{% extends "tracker/layout.html" %}
+
+{% block body %}
+<div class="dashboard-container">
+<div class="dashboard-header">
+    <h2>My Job Applications</h2>
+
+    <div class="dashboard-controls">
+        <!-- Add New Application -->
+        <a href="{% url 'tracker:add' %}">
+            <button class="btn-add">+ Add New Application</button>
+        </a>
+
+        <!-- Filter by status -->
+        <div class="filter-search">
+            <label for="status-filter">Filter by Status:</label>
+            <select id="status-filter">
+                <option value="all">All</option>
+                <option value="AP">Applied</option>
+                <option value="IN">Interview</option>
+                <option value="OF">Offer</option>
+                <option value="RJ">Rejected</option>
+            </select>
+
+            <!-- Search by Company or Position -->
+            <label for="search-input">Search:</label>
+            <input type="text" id="search-input" placeholder="Type company or position...">
+        </div>
+    </div>
+</div>
+
+{% if applications %}
+<table>
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>Applied</th>
+            <th>Interview</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for app in applications %}
+        <tr id="row-{{ app.id }}">
+            <td data-label="Company">{{ app.company_name }}</td>
+            <td data-label="Position">{{ app.position_title }}</td>
+            <td data-label="Status">
+                <select class="status-select status-{{ app.status_class }}" data-id="{{ app.id }}">
+                    {% for code, label in app.STATUS_CHOICES %}
+                    <option value="{{ code }}" {% if app.status == code %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                    {% endfor %}
+                </select>
+                
+            </td>
+            <td data-label="Applied">{{ app.applied_date }}</td>
+            <td data-label="Interview">{{ app.interview_date|default:"-" }}</td>
+            <td data-label="Actions">
+                <button class="delete-btn">🗑️ Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No applications added yet.</p>
+{% endif %}
+</div> </div>
+{% endblock %}

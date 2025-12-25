@@ -1,0 +1,13 @@
+# Core framework
+Django==5.2.4
+
+# Utilities
+pytz==2025.7
+sqlparse==1.0.5
+asgiref==3.7.2
+
+# Optional, useful for forms (if you use Django forms)
+django-crispy-forms==1.15.0
+
+# HTTP requests (if needed for any API calls)
+requests==2.32.0

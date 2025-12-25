@@ -1,0 +1,17 @@
+{% extends "tracker/layout.html" %}
+
+{% block body %}
+<h2>Delete Application</h2>
+
+<p>
+    Are you sure you want to delete:
+    <strong>{{ application.company_name }} – {{ application.position_title }}</strong>?
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+
+<a href="{% url 'tracker:dashboard' %}">Cancel</a>
+{% endblock %}

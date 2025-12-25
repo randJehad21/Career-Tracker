@@ -1,0 +1,37 @@
+{% extends "tracker/layout.html" %}
+
+{% block body %}
+<h2>Edit Application</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label>Company Name:</label><br>
+    <input type="text" name="company_name" value="{{ application.company_name }}" required><br><br>
+
+    <label>Position Title:</label><br>
+    <input type="text" name="position_title" value="{{ application.position_title }}" required><br><br>
+
+    <label>Status:</label><br>
+    <select name="status">
+        {% for code, label in application.STATUS_CHOICES %}
+            <option value="{{ code }}" {% if application.status == code %}selected{% endif %}>
+                {{ label }}
+            </option>
+        {% endfor %}
+    </select><br><br>
+
+    <label>Applied Date:</label><br>
+    <input type="date" name="applied_date" value="{{ application.applied_date }}"><br><br>
+
+    <label>Interview Date:</label><br>
+    <input type="date" name="interview_date" value="{{ application.interview_date }}"><br><br>
+
+    <label>Notes:</label><br>
+    <textarea name="notes">{{ application.notes }}</textarea><br><br>
+
+    <button type="submit">Update</button>
+</form>
+
+<a href="{% url 'tracker:dashboard' %}">Cancel</a>
+{% endblock %}

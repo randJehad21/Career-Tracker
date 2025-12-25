@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Career Application Tracker</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracker/styles.css' %}">
+    <script src="{% static 'tracker/main.js' %}" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="{% url 'tracker:dashboard' %}" class="nav-brand">Career Tracker</a>
+    </div>
+    <div class="nav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'tracker:dashboard' %}">Dashboard</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+    </div>
+</nav>
+
+<!-- Main content -->
+<main class="main-content">
+    {% block body %}
+    {% endblock %}
+</main>
+
+</body>
+</html>
